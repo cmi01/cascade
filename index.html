@@ -5,24 +5,36 @@
     <style>
         .matrix {
             display: grid;
-            grid-template-columns: repeat(5, 50px); /* 5 columns */
-            grid-template-rows: repeat(5, 50px); /* 5 rows */
+            grid-template-columns: repeat(25, 20px); /* 25 columns */
+            grid-template-rows: repeat(25, 20px); /* 25 rows */
+            border-collapse: collapse;
         }
         .cell {
             border: 1px solid black;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 20px;
+            height: 20px;
         }
         .highlight {
             background-color: yellow; /* Highlight color */
+        }
+        /* Bold borders for each 5x5 sector */
+        .cell:nth-child(5n), .cell:nth-child(5n + 1) {
+            border-right: 2px solid black;
+        }
+        .cell:nth-last-child(-n+5), .cell:nth-last-child(-n+6),
+        .cell:nth-last-child(-n+7), .cell:nth-last-child(-n+8),
+        .cell:nth-last-child(-n+9) {
+            border-bottom: 2px solid black;
         }
     </style>
 </head>
 <body>
     <div class="matrix" id="matrix">
         <script>
-            for (let i = 0; i < 25; i++) {
+            for (let i = 0; i < 625; i++) { // 25x25 grid
                 document.write('<div class="cell" id="cell' + i + '"></div>');
             }
         </script>
@@ -31,7 +43,7 @@
     <script>
         let currentRow = 0;
         let currentCol = 0;
-        const matrixSize = 5; // 5x5 matrix
+        const matrixSize = 25; // 25x25 matrix
 
         function updateHighlight() {
             // Clear existing highlight
